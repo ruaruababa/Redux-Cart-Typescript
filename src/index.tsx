@@ -10,7 +10,6 @@ import reducer from './store/reducer';
 const store: Store<ICartState, CartStateAction> & {
     dispatch: DispatchType;
 } = createStore(reducer, applyMiddleware(thunk));
-
 const rootElement = document.getElementById('root');
 render(
     <Provider store={store}>

@@ -13,14 +13,14 @@ export const AddItem: React.FC<Props> = ({saveItem}) => {
             [e.currentTarget.id]: e.currentTarget.value,
         });
     };
-
-    const addNewitem = (e: React.FormEvent) => {
+    console.log('item', item);
+    const addNewItem = (e: React.FormEvent) => {
         e.preventDefault();
         saveItem(item);
     };
 
     return (
-        <form onSubmit={addNewitem} className="Add-item">
+        <form onSubmit={addNewItem} className="Add-item">
             <input
                 type="text"
                 id="name"

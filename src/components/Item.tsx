@@ -1,19 +1,30 @@
 import * as React from 'react';
 import {Dispatch} from 'redux';
 import {useDispatch} from 'react-redux';
-
+import {
+    removeItem,
+    inCreaseQuantity,
+    deCreaseQuantity,
+} from '../store/actionCreators';
 type Props = {
     item: IItem;
-    removeItem: (item: IItem) => void;
 };
 
-export const Item: React.FC<Props> = ({item, removeItem}) => {
+export const Item: React.FC<Props> = ({item}) => {
     const dispatch: Dispatch<any> = useDispatch();
 
     const deleteItem = React.useCallback(
         (item: IItem) => dispatch(removeItem(item)),
-
         [dispatch, removeItem],
+    );
+
+    const inCreaseItem = React.useCallback(
+        (item: IItem) => dispatch(inCreaseQuantity(item)),
+        [dispatch],
+    );
+    const deCreaseItem = React.useCallback(
+        (item: IItem) => dispatch(deCreaseQuantity(item)),
+        [dispatch],
     );
 
     return (
@@ -21,6 +32,24 @@ export const Item: React.FC<Props> = ({item, removeItem}) => {
             <div>
                 <h1>{item.name}</h1>
                 <p>{item.price}</p>
+            </div>
+            <div>
+                <button
+                    onClick={() => {
+                        inCreaseItem(item);
+                    }}
+                >
+                    +
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                    onClick={() => {
+                        deCreaseItem(item);
+                        console.log('item', item);
+                    }}
+                >
+                    -
+                </button>
             </div>
             <button
                 onClick={() => {

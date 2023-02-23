@@ -37,7 +37,7 @@ const reducer = (
                 id: Math.floor(Math.random() * 100),
                 name: action.item.name,
                 price: action.item.price,
-                quantity: action.item.quantity,
+                quantity: 1,
             };
             console.log('newItem', newItem);
             saveCartState(state.items.concat(newItem));
@@ -53,6 +53,36 @@ const reducer = (
             return {
                 ...state,
                 items: updateItems,
+            };
+        case CartActionTypes.IN_CREASE_QUANTITY:
+            const updateQuantity: IItem[] = state.items.map((item) => {
+                if (item.id === action.item.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity + 1,
+                    };
+                }
+                return item;
+            });
+            saveCartState(updateQuantity);
+            return {
+                ...state,
+                items: updateQuantity,
+            };
+        case CartActionTypes.DE_CREASE_QUANTITY:
+            const deCreaseQuantity: IItem[] = state.items.map((item) => {
+                if (item.id === action.item.id) {
+                    return {
+                        ...item,
+                        quantity: item.quantity - 1,
+                    };
+                }
+                return item;
+            });
+            saveCartState(deCreaseQuantity);
+            return {
+                ...state,
+                items: deCreaseQuantity,
             };
     }
     return state;
