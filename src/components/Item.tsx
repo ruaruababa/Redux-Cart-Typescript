@@ -15,7 +15,7 @@ export const Item: React.FC<Props> = ({item}) => {
 
     const deleteItem = React.useCallback(
         (item: IItem) => dispatch(removeItem(item)),
-        [dispatch, removeItem],
+        [dispatch],
     );
 
     const inCreaseItem = React.useCallback(
@@ -44,8 +44,9 @@ export const Item: React.FC<Props> = ({item}) => {
                 <span>{item.quantity}</span>
                 <button
                     onClick={() => {
-                        deCreaseItem(item);
-                        console.log('item', item);
+                        item?.quantity > 1
+                            ? deCreaseItem(item)
+                            : deleteItem(item);
                     }}
                 >
                     -

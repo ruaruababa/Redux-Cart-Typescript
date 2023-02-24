@@ -13,7 +13,6 @@ export const AddItem: React.FC<Props> = ({saveItem}) => {
             [e.currentTarget.id]: e.currentTarget.value,
         });
     };
-    console.log('item', item);
     const addNewItem = (e: React.FormEvent) => {
         e.preventDefault();
         saveItem(item);

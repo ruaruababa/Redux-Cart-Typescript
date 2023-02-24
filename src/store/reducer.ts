@@ -71,7 +71,7 @@ const reducer = (
             };
         case CartActionTypes.DE_CREASE_QUANTITY:
             const deCreaseQuantity: IItem[] = state.items.map((item) => {
-                if (item.id === action.item.id) {
+                if (item.id === action.item.id && item.quantity > 1) {
                     return {
                         ...item,
                         quantity: item.quantity - 1,

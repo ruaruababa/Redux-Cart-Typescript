@@ -13,7 +13,7 @@ const App: React.FC = () => {
         (state: ICartState) => state.items,
         shallowEqual,
     );
-
+    React.useEffect(() => {}, [items]);
     const dispatch: Dispatch<any> = useDispatch();
     const saveItem = React.useCallback(
         (item: IItem) => dispatch(addItem(item)),
@@ -26,6 +26,13 @@ const App: React.FC = () => {
             {items.map((item: IItem) => (
                 <Item key={item.id} item={item} />
             ))}
+            <div>
+                total:{' '}
+                {items.reduce(
+                    (acc, item) => acc + item.price * item.quantity,
+                    0,
+                )}
+            </div>
         </main>
     );
 };
